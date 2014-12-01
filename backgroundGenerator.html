@@ -27,10 +27,6 @@
 			<div class="col-sm-10">
 				<select id="race" class="form-control">
 					<option value="">--Select Race--</option>
-					<option value="Human">Human</option>
-					<option value="Elf">Elf</option>
-					<option value="Dwarf">Dwarf</option>
-					<option value="Halfling">Halfling</option>
 				</select>
 			</div>
 		</div>
@@ -47,11 +43,6 @@
 			<div class="col-sm-10">
 				<select id="background" class="form-control">
 					<option value="">--Select Background--</option>
-					<option value="Soldier">Soldier</option>
-					<option value="Thief">Thief</option>
-					<option value="Acolyte">Acolyte</option>
-					<option value="Apprentice">Apprentice</option>
-					<option value="Farmer">Farmer</option>
 				</select>
 			</div>
 		</div>
@@ -87,6 +78,9 @@ var data = {
 }
 var results = "";
 
+for (var raceName in data.racesArray){
+	$('#race').append("<option value='" + data.racesArray[raceName] + "'>" + data.racesArray[raceName] + "</option>");
+}
 for (var className in data.classesArray){
 	$('#class').append("<option value='" + data.classesArray[className] + "'>" + data.classesArray[className] + "</option>");
 }
