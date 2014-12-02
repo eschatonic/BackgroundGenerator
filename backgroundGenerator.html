@@ -73,6 +73,10 @@ var data = {
 		dwarf:{
 			male:["Adrik","Alberich","Baern","Barendd","Brottor","Bruenor","Dain","Darrak","Delg","Eberk","Einkil","Fargrim","Flint","Gardain","Harbek","Kidrak","Morgran","Orsik","Oskar","Rangrim","Rurik","Taklinn","Thoradin","Thorin","Tordek","Traubon","Travok","Ulfgar","Veit","Vondal"],
 			female:["Amber","Artin","Audhild","Bardryn","Dagnal","Diesa","Eldeth","Falkrunn","Finellen","Gunnloda","Gurdis","Helja","Hlin","Kathra","Kristryd","Ilde","Liftrasa","Mardred","Riswynn","Sannl","Torbera","Torgga","Vistra"]
+		},
+		elf:{
+			male:["Melf"],
+			female:["Felf"]
 		}
 	}
 }
@@ -103,12 +107,20 @@ function getdata(){
 }
 
 function generate(n,p,r,c,b){
+<<<<<<< HEAD
 	if (!r) pickRace();
 	if (!p) pickPronoun();
 	if (!n) pickName();
 	if (!c) pickClass();
 	if (!b) pickBackground();
 	generateBackground();
+=======
+	if (!r) generateRace();
+	if (!p) generatePronoun();
+	if (!n) data.characterName = generateName(data.characterRace.toLowerCase(),data.characterPronoun.toLowerCase());
+	if (!c) generateClass();
+	if (!b) generateBackground();
+>>>>>>> origin/master
 	output();
 }
 function pickRace(){
@@ -124,6 +136,7 @@ function pickPronoun(){
 		data.characterPronoun = "they";
 	}
 }
+<<<<<<< HEAD
 function pickName(){
 	var r = data.characterRace.toLowerCase();
 	var p = data.characterPronoun.toLowerCase();
@@ -132,12 +145,20 @@ function pickName(){
 			data.characterName = getRandom(data.names.dwarf.male);
 		} else if (p == "she"){
 			data.characterName = getRandom(data.names.dwarf.female);
+=======
+function generateName(race,pronoun){
+	try{
+		if (pronoun == "he"){
+			return getRandom(data.names[race].male);
+		} else if (pronoun == "she"){
+			return getRandom(data.names[race].female);
+>>>>>>> origin/master
 		} else {
-			data.characterName = getRandom(data.names.dwarf.male.concat(data.names.dwarf.female));
+			return getRandom(data.names[race].male.concat(data.names.dwarf.female));
 		}
-		return false;
+	} catch(err) {
+		return "Herp Derpington";
 	}
-	data.characterName = "Herp Derpington";
 }
 function pickClass(){
 	data.characterClass = getRandom(data.classesArray);
@@ -153,7 +174,15 @@ function generateBackground(){
 	lifeStage("olderAdolescent")
 }
 function generateFamily(){
-	return "";
+	data.family = {
+		mother:{
+			name:generateName(data.characterRace.toLowerCase(),"she")
+		},
+		father:{
+			name:generateName(data.characterRace.toLowerCase(),"he")
+		}
+	}
+	return capitalise(data.characterPronoun) + " has a mother, " + data.family.mother.name + ", and a father, " + data.family.father.name + ".";
 }
 
 function lifeStage(stage){
