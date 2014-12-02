@@ -103,17 +103,18 @@ function getdata(){
 }
 
 function generate(n,p,r,c,b){
-	if (!r) generateRace();
-	if (!p) generatePronoun();
-	if (!n) generateName();
-	if (!c) generateClass();
-	if (!b) generateBackground();
+	if (!r) pickRace();
+	if (!p) pickPronoun();
+	if (!n) pickName();
+	if (!c) pickClass();
+	if (!b) pickBackground();
+	generateBackground();
 	output();
 }
-function generateRace(){
+function pickRace(){
 	data.characterRace = getRandom(data.racesArray);
 }
-function generatePronoun(){
+function pickPronoun(){
 	var r = Math.random();
 	if (r < 0.45){
 		data.characterPronoun = "he";
@@ -123,7 +124,7 @@ function generatePronoun(){
 		data.characterPronoun = "they";
 	}
 }
-function generateName(){
+function pickName(){
 	var r = data.characterRace.toLowerCase();
 	var p = data.characterPronoun.toLowerCase();
 	if (r == "dwarf"){
@@ -138,15 +139,30 @@ function generateName(){
 	}
 	data.characterName = "Herp Derpington";
 }
-function generateClass(){
+function pickClass(){
 	data.characterClass = getRandom(data.classesArray);
 }
-function generateBackground(){
+function pickBackground(){
 	data.characterBackground = getRandom(data.backgroundsArray);
+}
+function generateBackground(){
+	generateFamily();
+	lifeStage("birth");
+	lifeStage("child");
+	lifeStage("youngAdolescent")
+	lifeStage("olderAdolescent")
 }
 function generateFamily(){
 	return "";
 }
+
+function lifeStage(stage){
+	if (stage == "birth"){
+		
+	}
+}
+
+
 
 function output(){
 	var n = data.characterName;
